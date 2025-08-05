@@ -29,7 +29,7 @@ gradle.rootProject {
     extra.set("JavaVersion", JavaVersion.VERSION_17)
     extra.set("jvmTarget", "17")
 
-    extra.set("GROUP_ID", "aio.app.common")
+    extra.set("GROUP_ID", "firebase-native-commons")
 
     // Firebase publishing info
     extra.set("FIREBASE_EVENT_ARTIFACT_ID", "firebase-core")

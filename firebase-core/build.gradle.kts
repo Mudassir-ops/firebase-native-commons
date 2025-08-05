@@ -9,7 +9,7 @@ fun getExtDefault(key: String, default: String = ""): String =
 
 android {
     namespace = "com.example.firebase_core"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -76,24 +76,24 @@ dependencies {
     if (useLocalModule) {
         // implementation(project.android)
     } else {
-        extra.set("GROUP_ID", "aio.app.common")
+        extra.set("GROUP_ID", "firebase-native-commons")
 
-        extra.set("GROUP_ID", "aio.app.common")
 
-        debugImplementation(
-            "${getExtDefault("GROUP_ID")}:${getExtDefault("FIREBASE_EVENT_ARTIFACT_ID")}-debug:${
-                getExtDefault(
-                    "FIREBASE_EVENT_DEBUG_VERSION"
-                )
-            }"
-        )
-        releaseImplementation(
-            "${getExtDefault("GROUP_ID")}:${getExtDefault("FIREBASE_EVENT_ARTIFACT_ID")}:${
-                getExtDefault(
-                    "FIREBASE_EVENT_RELEASE_VERSION"
-                )
-            }"
-        )
+
+//        debugImplementation(
+//            "${getExtDefault("GROUP_ID")}:${getExtDefault("FIREBASE_EVENT_ARTIFACT_ID")}-debug:${
+//                getExtDefault(
+//                    "FIREBASE_EVENT_DEBUG_VERSION"
+//                )
+//            }"
+//        )
+//        releaseImplementation(
+//            "${getExtDefault("GROUP_ID")}:${getExtDefault("FIREBASE_EVENT_ARTIFACT_ID")}:${
+//                getExtDefault(
+//                    "FIREBASE_EVENT_RELEASE_VERSION"
+//                )
+//            }"
+//        )
 
     }
 }
@@ -110,7 +110,7 @@ publishing {
             pom {
                 name.set("FIREBASE_EVENT SDK")
                 description.set("A FIREBASE_EVENT SDK for  android App")
-                url.set("https://maven.pkg.github.com/Mudassir-ops/firebase-native-commons")
+                url.set("https://github.com/Mudassir-ops/firebase-native-commons.git")
             }
         }
         create<MavenPublication>("debug") {
@@ -124,7 +124,7 @@ publishing {
             pom {
                 name.set("FIREBASE_EVENT SDK")
                 description.set("A FIREBASE_EVENT SDK for  android App")
-                url.set("https://github.com/AIOApp/android-native-common")
+                url.set("hhttps://github.com/Mudassir-ops/firebase-native-commons")
             }
         }
     }
@@ -132,7 +132,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url =uri("https://maven.pkg.github.com/Mudassir-ops/firebase-native-commons")
+            url = uri("https://maven.pkg.github.com/Mudassir-ops/firebase-native-commons")
             credentials {
                 username = getExtDefault("githubUsername")
                 password = getExtDefault("githubToken")

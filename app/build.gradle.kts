@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 
-    implementation("aio.app.common:firebase-core:1.0.0")
+   // implementation("firebase-native-commons:firebase-core:1.0.0")
 
     //implementation(libs.firebase.core)
 
