@@ -70,7 +70,7 @@ dependencies {
     // Add the dependency for the Analytics library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-analytics")
-    
+
     val useLocalModule =
         project.findProperty("useLocalModules")?.toString()?.toBoolean() ?: true
     if (useLocalModule) {
@@ -110,7 +110,7 @@ publishing {
             pom {
                 name.set("FIREBASE_EVENT SDK")
                 description.set("A FIREBASE_EVENT SDK for  android App")
-                url.set("https://github.com/AIOApp/android-native-common")
+                url.set("https://maven.pkg.github.com/Mudassir-ops/firebase-native-commons")
             }
         }
         create<MavenPublication>("debug") {
@@ -132,7 +132,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AIOApp/android-native-common/")
+            url =uri("https://maven.pkg.github.com/Mudassir-ops/firebase-native-commons")
             credentials {
                 username = getExtDefault("githubUsername")
                 password = getExtDefault("githubToken")
