@@ -7,15 +7,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.firebase_core.domain.model.CrashReportAction
 import com.example.firebase_core.domain.model.FirebaseEvent
+import com.example.firebase_core.usecase.LogFirebaseCrashlyticsUseCase
 import com.example.firebase_core.usecase.LogFirebaseEventUseCase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var logEventUseCase: LogFirebaseEventUseCase
+
+    @Inject
+    lateinit var logFirebaseCrashlyticsUseCase: LogFirebaseCrashlyticsUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,8 +33,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        logBellClick()
+        // logBellClick()
+        //testCrashlyticsUseCase()
     }
+
     private fun logBellClick() {
         lifecycleScope.launch {
             logEventUseCase(
@@ -42,6 +52,39 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun testCrashlyticsUseCase() {
+        lifecycleScope.launch {
+            logFirebaseCrashlyticsUseCase(
+                CrashReportAction.LogMessage("User clicked test crash")
+            ).collect { result ->
+                result.onSuccess {
+                    Log.d("Crashlytics", "Event logged!")
+                }.onFailure {
+                    Log.e("Crashlytics", "Failed to log", it)
+                }
+            }
+
+            logFirebaseCrashlyticsUseCase(
+                CrashReportAction.RecordException(IllegalStateException("Test exception"))
+            ).collect { result ->
+                result.onSuccess {
+                    Log.d("Crashlytics", "Event logged!")
+                }.onFailure {
+                    Log.e("Crashlytics", "Failed to log", it)
+                }
+            }
+
+            logFirebaseCrashlyticsUseCase(
+                CrashReportAction.ForceCrash(FirebaseEvent("test_crash", mapOf("key" to "value")))
+            ).collect { result ->
+                result.onSuccess {
+                    Log.d("Crashlytics", "Event logged!")
+                }.onFailure {
+                    Log.e("Crashlytics", "Failed to log", it)
+                }
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dagger.hilt.plugins)
     id("kotlin-kapt")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -37,10 +38,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    firebaseCrashlytics {
+        nativeSymbolUploadEnabled = true
+        //mappingFileUploadEnabled = true
+    }
 }
 kapt {
     correctErrorTypes = true
 }
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -48,7 +54,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
- //   implementation(project(":firebase-core"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -57,10 +62,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 
-   // implementation("firebase-native-commons:firebase-core:1.0.0")
-
-    //implementation(libs.firebase.core)
-
-   // implementation(projects.androidCore)
+    //have crashlytics and analytics
+    implementation(project(":firebase-core"))
 
 }

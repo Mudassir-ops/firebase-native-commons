@@ -65,11 +65,10 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics.ndk)
 
-    // Add the dependency for the Analytics library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-analytics")
 
     val useLocalModule =
         project.findProperty("useLocalModules")?.toString()?.toBoolean() ?: true
@@ -77,7 +76,6 @@ dependencies {
         // implementation(project.android)
     } else {
         extra.set("GROUP_ID", "firebase-native-commons")
-
 
 
 //        debugImplementation(

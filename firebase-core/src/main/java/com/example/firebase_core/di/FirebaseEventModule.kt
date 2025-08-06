@@ -36,6 +36,6 @@ object FirebaseEventModule {
     @Provides
     fun provideLogEventUseCase(
         eventLogger: FirebaseEventLogger
-    ): LogFirebaseEventUseCase = LogFirebaseEventUseCase(eventLogger)
+    ): LogFirebaseEventUseCase = LogFirebaseEventUseCase(eventLogger = eventLogger)
 
 }
